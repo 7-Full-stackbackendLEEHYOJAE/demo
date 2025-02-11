@@ -1,26 +1,67 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: title
-  labels:
-    app: title
+  name: user-service
+  namespace: getrand
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
-      app: title
+      app: user-service
   template:
     metadata:
-      name: title
       labels:
-        app: title
+        app: user-service
     spec:
       containers:
-        - name: title
-          image: nginx
+        - name: user-service
+          image: leehyojae99/getrand_userseivce:latest  # ✅ Docker Hub 이미지 사용
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 80
-              protocol: TCP
-      restartPolicy: Always
-      
+            - containerPort: 5002
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: data-collection-service
+  namespace: getrand
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: data-collection-service
+  template:
+    metadata:
+      labels:
+        app: data-collection-service
+    spec:
+      containers:
+        - name: data-collection-service
+          image: leehyojae99/getrand_datacollectionservice:latest  # ✅ Docker Hub 이미지 사용
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5003
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: analytics-service
+  namespace: getrand
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: analytics-service
+  template:
+    metadata:
+      labels:
+        app: analytics-service
+    spec:
+      containers:
+        - name: analytics-service
+          image: leehyojae99/getrand_analyticsservice:latest  # ✅ Docker Hub 이미지 사용
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5004
