@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: user-service
-          image: leehyojae99/getrand_userseivce:latest  # ✅ Docker Hub 이미지 사용
+          image: leehyojae99/getrand_userseivce:v1.09  # ✅ Docker Hub 이미지 사용
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5002
@@ -38,7 +38,7 @@ spec:
     spec:
       containers:
         - name: data-collection-service
-          image: leehyojae99/getrand_datacollectionservice:latest  # ✅ Docker Hub 이미지 사용
+          image: leehyojae99/getrand_datacollectionservice:v1.05 # ✅ Docker Hub 이미지 사용
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5003
@@ -61,7 +61,7 @@ spec:
     spec:
       containers:
         - name: analytics-service
-          image: leehyojae99/getrand_analyticsservice:latest  # ✅ Docker Hub 이미지 사용
+          image: leehyojae99/getrand_analysticservice:v1.01
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5004
